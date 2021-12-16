@@ -1,0 +1,60 @@
+<!-- <form action="" [formGroup]="loginForm" (ngSubmit)="loginUser()">
+  <input type="text" name="user1" id="" formControlName="user"><br>
+  <input type="password" name="pass1" id="" formControlName="password" >
+  <button>Submit</button>
+</form> -->
+<!-- ------------------------------------------------------------------------------------------ -->
+<h1>New form</h1>
+<form action="" [formGroup]="signupform" (ngSubmit)="postData(signupform)" >
+  <input type="text" name="" id="" formControlName="name"><br>
+
+  <div *ngIf="signupform.controls['name'].invalid && (signupform.controls['name'].dirty || signupform.controls['name'].touched)" class="alert">
+    <div *ngIf="signupform.controls['name'].errors && signupform.controls['name'].errors['required']">
+      Please enter username
+    </div>
+  </div>
+
+  <input type="password" name="" id="" formControlName="password">
+  <button [disabled]="!signupform.valid" (click)="post()">Submit</button>
+  <button (click)="reset()">Reset</button>
+  <button (click)="Filldata()" >FillData</button>
+</form>
+
+<!-- form Array -->
+<br>
+<br>
+<h1>Form Array</h1>
+<form [formGroup]='form' (ngSubmit)="onsend()">
+  <div formArrayName="ContactNos">
+    <div *ngFor="let contact of form.controls.ContactNos.controls; index as i">
+      <input [formControlName]='i' placeholder="contact no">
+    </div>
+  </div>
+  <button>Submit</button>
+</form>
+<button (click)="addContact()">Add Contact No.</button>
+<button (click)="setPreset()" >Set preset</button>
+
+
+
+<!-- ------------------------------------------------------------------------------------------ -->
+<br><br><br><br>
+<h1>Template Driven Form </h1>
+
+
+
+<form action="" #regForm='ngForm' (ngSubmit)="register(regForm)">
+  <input type="text" name="nm" id="name"  placeholder="name" ngModel ><br>
+  <input type="number" name="age1" id="age"  placeholder="Age" ngModel ><br>
+  <input type="text" name="gen" id="gender"  placeholder="gender" ngModel ><br>
+  <input type="email" name="email" id="" placeholder="email" ngModel email #email="ngModel" ><br>
+  <span *ngIf="email.touched && !email.valid" >please enter email</span>
+  
+  IsIndian<input type="radio" name="isindian" id="" value="true" ngModel>
+  NonIndian<input type="radio" name="isindian" id="" value="false" ngModel><br>
+  Term and Condition Accepted<input type="checkbox" name="Accepted" id="" ngModel>
+
+  <input type="submit" value="submit" [disabled]="! regForm.valid" >
+  <button (click)='clear(regForm)' >Reset</button>
+  <button (click)='fill(regForm)' >fillData</button>
+</form>
